@@ -12,6 +12,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Lora';
+  src: url('../fonts/Lora/Lora-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Julius Sans One';
+  src: url('../fonts/Julius_Sans_One/JuliusSansOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -197,9 +209,9 @@ h6 {
   color: #36343a;
   transition: 0.3s;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
+  font-family: "Julius Sans One", sans-serif;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -440,19 +452,17 @@ h6 {
 #hero h2 {
   color: #eee;
   margin-bottom: 40px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
-  font-family: "Open Sans", sans-serif;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-family: 'Lora', serif;
+  letter-spacing: 1px;
 }
 
 #hero .btn-get-started {
-  font-family: "Poppins", sans-serif;
+  font-family: "Julius Sans One", sans-serif;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
-  letter-spacing: 1px;
   display: inline-block;
   padding: 8px 28px;
   border-radius: 50px;
@@ -483,8 +493,9 @@ h6 {
   }
 
   #hero h1 {
+    font-family: 'Fleur De Leah', cursive;
     font-size: 64px;
-    letter-spacing: 12px;
+    letter-spacing: 24px;
     line-height: 72px;
   }
 }
