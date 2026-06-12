@@ -420,10 +420,9 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 80vh;
-  background: url("../img/stock/vinea-care-grandmother-holding-baby.jpg") center center;
-  background-size: cover;
+  height: 90vh;
   position: relative;
+  overflow: hidden;
 }
 
 #hero .container {
@@ -438,7 +437,130 @@ h6 {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 2;
 }
+
+/* Carousel Styles */
+.hero-carousel-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  transform: translateX(100%);
+  z-index: 1;
+}
+
+.hero-slide.active {
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.hero-slide.transitioning {
+  transition: transform 0.8s ease-in-out;
+}
+
+.hero-slide.slide-left {
+  transform: translateX(-100%);
+}
+
+.hero-slide.slide-right {
+  transform: translateX(100%);
+}
+
+.hero-slide.prep-left {
+  transform: translateX(-100%) !important;
+  transition: none !important;
+}
+
+/* Controls */
+.hero-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.25);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease, background-color 0.3s ease;
+      pointer-events: auto;
+    }
+
+.hero-control i {
+  pointer-events: none; /* Ensure the whole button receives hover/click */
+}
+
+.hero-control:hover {
+  background: #009970;
+}
+
+.hero-control.prev {
+  left: 20px;
+}
+
+.hero-control.next {
+  right: 20px;
+}
+
+/* Hover action on #hero */
+#hero:hover .hero-control,
+#hero:hover .hero-indicators {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
+/* Indicators */
+.hero-indicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.hero-indicators .indicator {
+      width: 30px;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      pointer-events: auto;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border-radius: 2px;
+    }
+
+.hero-indicators .indicator.active {
+  background-color: #009970;
+  transform: scaleY(1.5); /* bold dash */
+}
+
 
 #hero h1 {
   margin: 0 0 10px 0;
@@ -475,12 +597,6 @@ h6 {
 #hero .btn-get-started:hover {
   background: #009970;
   border: 2px solid #009970;
-}
-
-@media (min-width: 1024px) {
-  #hero {
-    background-attachment: fixed;
-  }
 }
 
 @media (max-width: 768px) {
