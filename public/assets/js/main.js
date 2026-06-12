@@ -353,4 +353,137 @@
     startAutoPlay();
   });
 
+  /**
+   * Reviews Widget Carousel
+   */
+  window.addEventListener('load', () => {
+    const reviewsWidget = select('#reviews-widget');
+    if (!reviewsWidget) return;
+
+    const reviews = [
+      {
+        name: "Nina Jones",
+        stars: 5,
+        message: "Excellent care provided for my mother in law.",
+        image: "/assets/img/profiles/ninajones.jpg",
+        prop: "/assets/img/props/vinea-care-jenga.png"
+      },
+      {
+        name: "Thomas Howe",
+        stars: 5,
+        message: "Provided brilliant end of life care for a terminally ill loved one. Lovely people that were understanding and friendly and their presence really helped us. Cannot recommend them more.",
+        image: "/assets/img/profiles/thomashowe.jpg",
+        prop: "/assets/img/props/vinea-care-shopping.png"
+      },
+      {
+        name: "Janet White",
+        stars: 5,
+        message: "Exceptional care from every member of staff. Highly recommend.",
+        image: "/assets/img/profiles/janetwhite.jpg",
+        prop: "/assets/img/props/vinea-care-baseball.png"
+      }
+    ];
+
+    let slidesHTML = '';
+    let indicatorsHTML = '';
+
+    reviews.forEach((review, index) => {
+      let activeClass = index === 0 ? 'active' : '';
+      let starsHtml = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars);
+      
+      slidesHTML += `
+        <div class="review-slide ${activeClass}" data-index="${index}">
+          <div class="review-card">
+            <div class="review-header">
+              <img class="profile-image" src="${review.image}" alt="${review.name}">
+              <div class="review-meta">
+                <h4>${review.name}</h4>
+                <div class="stars">${starsHtml}</div>
+              </div>
+            </div>
+            <p class="message">"${review.message}"</p>
+          </div>
+          <img class="prop-image" src="${review.prop}" alt="Prop">
+        </div>
+      `;
+      
+      indicatorsHTML += `<span class="indicator ${activeClass}" data-index="${index}"></span>`;
+    });
+
+    reviewsWidget.innerHTML = `
+      <div class="reviews-nurse">
+        <img src="/assets/img/props/vinea-care-nurse.png" alt="Nurse">
+      </div>
+      <div class="reviews-carousel">
+        ${slidesHTML}
+      </div>
+      <div class="review-indicators">
+        ${indicatorsHTML}
+      </div>
+    `;
+
+    const slides = select('.review-slide', true);
+    const indicators = select('#reviews-widget .indicator', true);
+    let currentIndex = 0;
+    let isTransitioning = false;
+    let autoPlayInterval;
+
+    function showReviewSlide(index) {
+      if (isTransitioning || index === currentIndex) return;
+      isTransitioning = true;
+
+      const currentSlide = slides[currentIndex];
+      const nextSlide = slides[index];
+
+      indicators.forEach((ind, i) => {
+        ind.classList.toggle('active', i === index);
+      });
+
+      currentSlide.style.opacity = '0';
+
+      setTimeout(() => {
+        currentSlide.classList.remove('active');
+        currentSlide.style.visibility = 'hidden';
+
+        nextSlide.style.opacity = '0';
+        nextSlide.style.visibility = 'visible';
+        nextSlide.classList.add('active');
+        
+        // trigger reflow
+        nextSlide.offsetHeight;
+        
+        nextSlide.style.opacity = '1';
+        currentIndex = index;
+
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 800);
+      }, 800);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayInterval = setInterval(() => {
+        let nextIndex = (currentIndex + 1) % slides.length;
+        showReviewSlide(nextIndex);
+      }, 15000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+      }
+    }
+
+    indicators.forEach((ind, i) => {
+      ind.addEventListener('click', () => {
+        if (i === currentIndex) return;
+        showReviewSlide(i);
+        startAutoPlay();
+      });
+    });
+
+    startAutoPlay();
+  });
+
 })()
