@@ -1,6 +1,6 @@
 :root {
-  --profile-primary: #1899ff;
-  --profile-bg: #f8fbff;
+  --profile-primary: #80b150;
+  --profile-bg: #f8fbf5;
   --profile-card-bg: #ffffff;
   --profile-text-main: #333;
   --profile-text-muted: #666;
@@ -68,14 +68,14 @@
 }
 
 .profile-nav .nav-link:hover {
-  background: rgba(24, 153, 255, 0.1);
+  background: rgba(128, 177, 80, 0.1);
   color: var(--profile-primary);
 }
 
 .profile-nav .nav-link.active {
   background: var(--profile-primary);
   color: #fff !important;
-  box-shadow: 0 4px 15px rgba(24, 153, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(128, 177, 80, 0.3);
 }
 
 .badge-notification {
@@ -116,7 +116,7 @@
 
 .form-control:focus {
   border-color: var(--profile-primary);
-  box-shadow: 0 0 0 3px rgba(24, 153, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(128, 177, 80, 0.15);
 }
 
 .btn-primary {
@@ -128,9 +128,9 @@
 }
 
 .btn-primary:hover {
-  background-color: #007ae6;
+  background-color: #6c9841;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(24, 153, 255, 0.4);
+  box-shadow: 0 5px 15px rgba(128, 177, 80, 0.4);
 }
 
 /* Inbox & Notifications List */

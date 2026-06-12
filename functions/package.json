@@ -5,7 +5,7 @@
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "serve": "npm run build && concurrently --kill-others-on-fail \"tsc --watch --preserveWatchOutput\" \"firebase emulators:start --only \\\"hosting,functions\\\"\"",
+    "serve": "npm run build && concurrently --kill-others-on-fail \"tsc --watch --preserveWatchOutput\" \"firebase emulators:start --only \\\"hosting,functions\\\"\" \"npx livereload \\\"views, ../public\\\" -w 100 -ee ejs\"",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
