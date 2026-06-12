@@ -9,6 +9,31 @@ if (!admin.apps.length) {
 
 const app = express();
 
+// LiveReload setup for local development emulator
+if (process.env.FUNCTIONS_EMULATOR === "true") {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const livereload = require("livereload");
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const connectLiveReload = require("connect-livereload");
+    
+    const liveReloadServer = livereload.createServer({
+      exts: ["html", "css", "js", "png", "gif", "jpg", "ejs"],
+      delay: 100
+    });
+    
+    liveReloadServer.watch([
+      path.join(__dirname, "../views"),
+      path.join(__dirname, "../../public")
+    ]);
+    
+    app.use(connectLiveReload());
+    console.log("LiveReload middleware registered, watching views and public assets.");
+  } catch (err) {
+    console.error("Failed to initialize LiveReload:", err);
+  }
+}
+
 app.use(cookieParser());
 app.use(express.json());
 

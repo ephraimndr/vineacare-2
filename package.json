@@ -2,5 +2,11 @@
   "dependencies": {
     "@genkit-ai/googleai": "^1.28.0",
     "genkit": "^1.31.0"
+  },
+  "scripts": {
+    "dev": "npm run --prefix functions serve"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
