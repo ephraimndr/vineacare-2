@@ -84,11 +84,7 @@ if (authNavLink) {
             });
           } catch(e) { console.warn("Backend session sync failed but frontend auth passed", e); }
           
-          if (window.location.pathname.includes('/forum')) {
-              window.dispatchEvent(new CustomEvent('navLoginSuccess', { detail: userObj }));
-          } else {
-              window.location.href = '/forum';
-          }
+          window.location.reload();
         }).catch((error) => {
           console.error("Login error:", error);
         });

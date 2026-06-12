@@ -44,57 +44,6 @@ app.get("/index.html", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/forum", (req, res) => {
-  res.render("forum", { title: "Forum" });
-});
-
-app.get("/forum.html", (req, res) => {
-  res.redirect("/forum");
-});
-
-app.get("/forum/post/:id", (req, res) => {
-  res.render("post", { title: "Post Thread", postId: req.params.id });
-});
-
-
-
-
-
-// Endpoint to create a new forum post securely
-app.post("/api/forum/post", async (req, res) => {
-  const uid = res.locals.uid;
-  if (!uid) {
-    res.status(401).json({ error: "Unauthorized. Please log in." });
-    return;
-  }
-
-  try {
-    const { text, media } = req.body;
-    
-    // Fetch the user record to get the email (or use custom claims)
-    const userRecord = await admin.auth().getUser(uid);
-    const authorEmail = userRecord.email || "Anonymous";
-
-    const postData = {
-      authorUid: uid,
-      authorEmail: authorEmail,
-      text: text || "",
-      media: media || [],
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      likeCount: 0,
-      repostCount: 0,
-      commentCount: 0,
-      bookmarkCount: 0
-    };
-
-    const docRef = await admin.firestore().collection('posts').add(postData);
-    res.json({ success: true, id: docRef.id });
-  } catch (error) {
-    console.error("Error creating post:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
 
 
 // Endpoint to establish session cookie
