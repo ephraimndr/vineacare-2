@@ -4,7 +4,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -108,7 +108,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -117,7 +117,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -127,7 +127,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -166,9 +166,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -176,7 +176,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -253,12 +253,32 @@
    * Hero Background Carousel
    */
   window.addEventListener('load', () => {
+    // Initialize hero carousel with dynamic slides and indicators
     const slides = select('.hero-slide', true);
-    const indicators = select('.hero-indicators .indicator', true);
     const prevBtn = select('.hero-control.prev');
     const nextBtn = select('.hero-control.next');
 
     if (!slides.length) return;
+
+    // Remove any existing active classes
+    slides.forEach(slide => slide.classList.remove('active'));
+    const indicatorsContainer = select('.hero-indicators');
+    let indicators = [];
+    if (indicatorsContainer) {
+      // Generate indicators based on slides count
+      indicatorsContainer.innerHTML = '';
+      slides.forEach((_, i) => {
+        const span = document.createElement('span');
+        span.className = 'indicator';
+        span.dataset.slide = i;
+        indicatorsContainer.appendChild(span);
+      });
+      indicators = select('.hero-indicators .indicator', true);
+    }
+
+    // Activate first slide
+    slides[0].classList.add('active');
+    if (indicators[0]) indicators[0].classList.add('active');
 
     let currentIndex = 0;
     let isTransitioning = false;
@@ -280,26 +300,25 @@
         }
       });
 
-      // Slide Transitions
-      if (direction === 'next') {
-        nextSlide.classList.add('transitioning');
-        currentSlide.classList.add('transitioning');
-        
-        nextSlide.classList.add('active');
+      // Fade opacity transitions
+      // Ensure both slides are prepared
+      nextSlide.classList.add('active');
+      nextSlide.style.opacity = '0';
+      // Force reflow
+      nextSlide.offsetHeight;
+      // Apply transition
+      nextSlide.style.transition = 'opacity 0.8s';
+      currentSlide.style.transition = 'opacity 0.8s';
+      // Fade out current, fade in next
+      nextSlide.style.opacity = '1';
+      currentSlide.style.opacity = '0';
+      // After transition, clean up
+      setTimeout(() => {
         currentSlide.classList.remove('active');
-        currentSlide.classList.add('slide-left');
-      } else {
-        nextSlide.classList.add('prep-left');
-        nextSlide.offsetHeight; // Force reflow
-
-        nextSlide.classList.add('transitioning');
-        currentSlide.classList.add('transitioning');
-
-        nextSlide.classList.remove('prep-left');
-        nextSlide.classList.add('active');
-        currentSlide.classList.remove('active');
-        currentSlide.classList.add('slide-right');
-      }
+        currentSlide.style.transition = '';
+        currentSlide.style.opacity = '';
+        nextSlide.style.transition = '';
+      }, 800);
 
       currentIndex = index;
 
@@ -390,7 +409,7 @@
     reviews.forEach((review, index) => {
       let activeClass = index === 0 ? 'active' : '';
       let starsHtml = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars);
-      
+
       slidesHTML += `
         <div class="review-slide ${activeClass}" data-index="${index}">
           <div class="review-card">
@@ -406,7 +425,7 @@
           <img class="prop-image" src="${review.prop}" alt="Prop">
         </div>
       `;
-      
+
       indicatorsHTML += `<span class="indicator ${activeClass}" data-index="${index}"></span>`;
     });
 
@@ -448,10 +467,10 @@
         nextSlide.style.opacity = '0';
         nextSlide.style.visibility = 'visible';
         nextSlide.classList.add('active');
-        
+
         // trigger reflow
         nextSlide.offsetHeight;
-        
+
         nextSlide.style.opacity = '1';
         currentIndex = index;
 
@@ -466,7 +485,7 @@
       autoPlayInterval = setInterval(() => {
         let nextIndex = (currentIndex + 1) % slides.length;
         showReviewSlide(nextIndex);
-      }, 15000);
+      }, 8000);
     }
 
     function stopAutoPlay() {

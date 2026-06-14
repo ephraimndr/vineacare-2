@@ -431,7 +431,7 @@ h6 {
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -486,29 +486,30 @@ h6 {
 
 /* Controls */
 .hero-control {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.25);
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      color: #fff;
-      font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 3;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease, visibility 0.4s ease, background-color 0.3s ease;
-      pointer-events: auto;
-    }
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.25);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease, background-color 0.3s ease;
+  pointer-events: auto;
+}
 
 .hero-control i {
-  pointer-events: none; /* Ensure the whole button receives hover/click */
+  pointer-events: none;
+  /* Ensure the whole button receives hover/click */
 }
 
 .hero-control:hover {
@@ -547,18 +548,19 @@ h6 {
 }
 
 .hero-indicators .indicator {
-      width: 30px;
-      height: 4px;
-      background-color: rgba(255, 255, 255, 0.4);
-      cursor: pointer;
-      pointer-events: auto;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      border-radius: 2px;
-    }
+  width: 30px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 2px;
+}
 
 .hero-indicators .indicator.active {
   background-color: #009970;
-  transform: scaleY(1.5); /* bold dash */
+  transform: scaleY(1.5);
+  /* bold dash */
 }
 
 
@@ -802,7 +804,8 @@ section {
 }
 
 .review-meta .stars {
-  color: #ffc107; /* gold */
+  color: #ffc107;
+  /* gold */
   font-size: 16px;
 }
 
@@ -854,7 +857,8 @@ section {
 }
 
 .review-indicators .indicator.active {
-  background-color: #009970; /* primary color */
+  background-color: #009970;
+  /* primary color */
 }
 
 /* Mobile adjustments for Reviews Widget */
@@ -864,7 +868,7 @@ section {
     align-items: stretch;
     min-height: auto;
   }
-  
+
   .reviews-carousel {
     position: relative;
     width: 100%;
@@ -873,12 +877,13 @@ section {
     right: auto;
     margin-bottom: 20px;
   }
-  
+
   .reviews-nurse {
     position: relative;
     width: 250px;
     left: auto;
-    margin-left: auto; /* bottom right */
+    margin-left: auto;
+    /* bottom right */
     margin-right: 0;
   }
 }
