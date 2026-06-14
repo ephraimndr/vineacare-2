@@ -4,7 +4,9 @@
     "genkit": "^1.31.0"
   },
   "scripts": {
-    "dev": "npm run --prefix functions serve"
+    "dev": "npm run --prefix functions serve",
+    "build:static": "node scripts/build-static.js",
+    "deploy": "npm run build:static && firebase deploy --only hosting,firestore"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
