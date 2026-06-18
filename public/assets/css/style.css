@@ -33,7 +33,7 @@ body {
 }
 
 a {
-  color: #80b150;
+  color: #009970;
   text-decoration: none;
 }
 
@@ -578,11 +578,12 @@ h6 {
   margin-bottom: 40px;
   font-size: 18px;
   font-weight: 500;
-  font-family: 'Lora', serif;
+  font-family: 'Julius Sans One', sans-serif;
   letter-spacing: 1px;
 }
 
-#hero .btn-get-started {
+#hero .btn-get-started,
+#about .btn-reviews {
   font-family: "Julius Sans One", sans-serif;
   text-transform: uppercase;
   font-weight: 600;
@@ -592,13 +593,15 @@ h6 {
   border-radius: 50px;
   transition: 0.5s;
   margin: 10px;
-  border: 2px solid #fff;
-  color: #fff;
+  border: 2px solid #00b383;
+  color: #ffffff;
+  background-color: #009970;
 }
 
-#hero .btn-get-started:hover {
+#hero .btn-get-started:hover,
+#about .btn-reviews:hover {
   background: #009970;
-  border: 2px solid #009970;
+  border: 2px solid #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -723,6 +726,15 @@ section {
 /*--------------------------------------------------------------
 # Reviews Widget
 --------------------------------------------------------------*/
+
+.values-text {
+  font-family: 'Fleur De Leah', cursive;
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 4px;
+  font-size: 28px;
+}
+
 .reviews-widget {
   position: relative;
   width: 100%;
@@ -936,6 +948,7 @@ section {
   font-size: 20px;
   font-weight: 700;
   margin: 0 0 30px 0;
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .why-us .icon-boxes .icon-box p {
@@ -951,7 +964,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(2, 2, 2, 0.7), rgba(0, 0, 0, 0.7)), url("../img/stock/pexels_matthias_zomer_.jpg") fixed center center;
+  background: linear-gradient(rgba(2, 2, 2, 0.2), rgba(0, 0, 0, 0.3)), url("../img/stock/vinea_care_vineyard_green.jpg") fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
@@ -977,13 +990,8 @@ section {
   border-radius: 25px;
   transition: 0.5s;
   margin-top: 10px;
-  border: 2px solid #fff;
   color: #fff;
-}
-
-.cta .cta-btn:hover {
   background: #009970;
-  border: 2px solid #009970;
 }
 
 /*--------------------------------------------------------------
@@ -1734,8 +1742,7 @@ section {
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #009970;
-  color: #fff;
+  color: #009970;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
@@ -1758,7 +1765,7 @@ section {
 .chat-widget-container {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  right: 50px;
   z-index: 1000;
   display: flex;
   flex-direction: column;
