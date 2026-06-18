@@ -1,11 +1,8 @@
 {
   "dependencies": {},
   "scripts": {
-    "dev": "npm run --prefix functions serve",
-    "build:static": "node scripts/build-static.js",
-    "deploy": "npm run build:static && firebase deploy --only hosting,firestore"
+    "dev": "firebase emulators:start --only hosting",
+    "deploy": "firebase deploy --only hosting,firestore"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.14"
-  }
+  "devDependencies": {}
 }
