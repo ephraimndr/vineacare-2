@@ -16,17 +16,13 @@
     "node": "24"
   },
   "dependencies": {
-    "@genkit-ai/google-genai": "^1.31.0",
-    "cookie-parser": "^1.4.7",
     "ejs": "^5.0.1",
     "express": "^5.2.1",
     "firebase-admin": "^13.6.0",
-    "firebase-functions": "^7.0.0",
-    "genkit": "^1.31.0"
+    "firebase-functions": "^7.0.0"
   },
   "devDependencies": {
     "@types/connect-livereload": "^0.6.3",
-    "@types/cookie-parser": "^1.4.10",
     "@types/ejs": "^3.1.5",
     "@types/livereload": "^0.9.5",
     "@typescript-eslint/eslint-plugin": "^5.12.0",

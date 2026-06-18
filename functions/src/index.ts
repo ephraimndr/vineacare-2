@@ -30,6 +30,5 @@ setGlobalOptions({maxInstances: 10});
 //   response.send("Hello from Firebase!");
 // });
 
-export * from "./vinea-care-ai";
 import appInstance from "./app";
 export const app = onRequest(appInstance);

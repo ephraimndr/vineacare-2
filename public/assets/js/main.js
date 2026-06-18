@@ -404,7 +404,6 @@
     ];
 
     let slidesHTML = '';
-    let indicatorsHTML = '';
 
     reviews.forEach((review, index) => {
       let activeClass = index === 0 ? 'active' : '';
@@ -425,8 +424,6 @@
           <img class="prop-image" src="${review.prop}" alt="Prop">
         </div>
       `;
-
-      indicatorsHTML += `<span class="indicator ${activeClass}" data-index="${index}"></span>`;
     });
 
     reviewsWidget.innerHTML = `
@@ -436,13 +433,9 @@
       <div class="reviews-carousel">
         ${slidesHTML}
       </div>
-      <div class="review-indicators">
-        ${indicatorsHTML}
-      </div>
     `;
 
     const slides = select('.review-slide', true);
-    const indicators = select('#reviews-widget .indicator', true);
     let currentIndex = 0;
     let isTransitioning = false;
     let autoPlayInterval;
@@ -453,10 +446,6 @@
 
       const currentSlide = slides[currentIndex];
       const nextSlide = slides[index];
-
-      indicators.forEach((ind, i) => {
-        ind.classList.toggle('active', i === index);
-      });
 
       currentSlide.style.opacity = '0';
 
@@ -493,14 +482,6 @@
         clearInterval(autoPlayInterval);
       }
     }
-
-    indicators.forEach((ind, i) => {
-      ind.addEventListener('click', () => {
-        if (i === currentIndex) return;
-        showReviewSlide(i);
-        startAutoPlay();
-      });
-    });
 
     startAutoPlay();
   });

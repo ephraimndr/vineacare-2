@@ -827,40 +827,6 @@ section {
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
 }
 
-
-
-.review-indicators {
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 3;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.reviews-widget:hover .review-indicators {
-  opacity: 1;
-  visibility: visible;
-}
-
-.review-indicators .indicator {
-  width: 25px;
-  height: 4px;
-  background-color: #ccc;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
-}
-
-.review-indicators .indicator.active {
-  background-color: #009970;
-  /* primary color */
-}
-
 /* Mobile adjustments for Reviews Widget */
 @media (max-width: 992px) {
   .reviews-widget {

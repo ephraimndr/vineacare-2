@@ -1,27 +1,3 @@
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFunctions, httpsCallable, connectFunctionsEmulator } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-functions.js";
-
-// Initialize Firebase (Reuse from auth.js)
-const firebaseConfig = {
-  apiKey: "AIzaSyCGYnRZEfbpNkcfEte5t7qs6IytAXx_xDw",
-  authDomain: "vineacare-test.firebaseapp.com",
-  projectId: "vineacare-test",
-  storageBucket: "vineacare-test.firebasestorage.app",
-  messagingSenderId: "536960966057",
-  appId: "1:536960966057:web:aa9cd5f3d3c713aba5b8b8",
-  measurementId: "G-XMS1JNEWPS"
-};
-
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const functions = getFunctions(app);
-
-if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:") {
-  connectFunctionsEmulator(functions, "127.0.0.1", 5001);
-}
-
-// Update this to match your actual deployed Genkit flow / Cloud Function name
-const chatWithVineaCareAI = httpsCallable(functions, "chatWithVineaCareAI");
-
 document.addEventListener("DOMContentLoaded", () => {
   const chatFab = document.getElementById("chat-fab");
   const chatWindow = document.getElementById("chat-window");
@@ -50,21 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  function extractPageContext() {
-    // Extract vital context sections text directly from the DOM
-    const aboutSection = document.getElementById("about")?.innerText || "";
-    const servicesSection = document.getElementById("services")?.innerText || "";
-    const whyUsSection = document.getElementById("why-us")?.innerText || "";
-    const contactSection = document.getElementById("contact")?.innerText || "";
-    
-    return `
-      ABOUT: ${aboutSection.slice(0, 500)}...
-      SERVICES: ${servicesSection.slice(0, 500)}...
-      WHY US: ${whyUsSection.slice(0, 500)}...
-      CONTACT: ${contactSection.slice(0, 500)}...
-    `.trim();
-  }
-
   async function handleSend() {
     const text = chatInput.value.trim();
     if (!text) return;
@@ -80,25 +41,26 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBody.appendChild(typingIndicator);
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    const contextData = extractPageContext();
+    // Simulate chatbot response locally
+    setTimeout(() => {
+      if (chatBody.contains(typingIndicator)) {
+        chatBody.removeChild(typingIndicator);
+      }
 
-    try {
-      // Call Firebase Genkit Function
-      const result = await chatWithVineaCareAI({ 
-        message: text,
-        context: contextData
-      });
+      // Generate a mock response helper or generic support guide
+      let responseText = "Thank you for reaching out! I am the Vinea Care offline assistant. For professional care inquiries, careers, or urgent assistance, please contact us directly at admin@vineacare.com or +44 7366 313213. We'll be happy to help!";
       
-      const responseText = result.data.reply || result.data || "I couldn't generate a response. Please try again.";
-      
-      // Remove typing indicator and show AI response
-      chatBody.removeChild(typingIndicator);
+      const lowerText = text.toLowerCase();
+      if (lowerText.includes("job") || lowerText.includes("career") || lowerText.includes("apply") || lowerText.includes("work")) {
+        responseText = "If you're interested in joining our caregiving team, please download our application form using the button in the 'Become a Caregiver' section and send it to careers@vineacare.com.";
+      } else if (lowerText.includes("service") || lowerText.includes("live-in") || lowerText.includes("palliative") || lowerText.includes("respite") || lowerText.includes("visiting")) {
+        responseText = "We provide Live-in Care, Palliative Care, Respite Care, and Visiting Care. Please let us know if you'd like us to arrange a call to discuss a tailored care plan, or dial us at +44 7366 313213.";
+      } else if (lowerText.includes("hello") || lowerText.includes("hi ") || lowerText.includes("hey")) {
+        responseText = "Hello! Welcome to Vinea Care support. How can I guide you today? (You can ask about our care services, job opportunities, or how to contact us).";
+      }
+
       addMessage(responseText, true);
-    } catch (error) {
-      console.error("Error communicating with Genkit AI:", error);
-      chatBody.removeChild(typingIndicator);
-      addMessage("Sorry, I encountered an error. Please try again later.", true);
-    }
+    }, 800);
   }
 
   sendChat.addEventListener("click", handleSend);

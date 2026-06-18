@@ -5,7 +5,7 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "functions": [
+  "_functions": [
     {
       "source": "functions",
       "codebase": "default",
